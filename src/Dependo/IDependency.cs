@@ -13,6 +13,8 @@
 
         IEnumerable<T> Children { get; }
 
+        bool HasChildren();
+
         void AddChild(T child);
 
         bool TryAddChild(T child);

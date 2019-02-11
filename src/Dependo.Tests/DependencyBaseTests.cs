@@ -1,6 +1,7 @@
 ﻿namespace Dependo.Tests
 {
     using System;
+    using Exceptions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Plugins;
 

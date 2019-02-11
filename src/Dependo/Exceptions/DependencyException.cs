@@ -1,4 +1,4 @@
-﻿namespace Dependo
+﻿namespace Dependo.Exceptions
 {
     using System;
     using System.Runtime.Serialization;

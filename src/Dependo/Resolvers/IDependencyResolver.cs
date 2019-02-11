@@ -1,7 +1,8 @@
-﻿namespace Dependo
+﻿namespace Dependo.Resolvers
 {
     using System;
     using System.Collections.Generic;
+    using Containers;
 
     public interface IDependencyResolver<T, TKey>
         where T : class

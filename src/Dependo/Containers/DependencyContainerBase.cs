@@ -1,4 +1,4 @@
-﻿namespace Dependo
+﻿namespace Dependo.Containers
 {
     using System;
     using System.Collections.Generic;

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Exceptions;
 
     public abstract class DependencyBase<T, TKey> : IDependency<T, TKey>
         where T : DependencyBase<T, TKey>
@@ -50,6 +51,11 @@
         public bool Equals(T other)
         {
             return CompareTo(other) == 0;
+        }
+
+        public bool HasChildren()
+        {
+            return _children.Count > 0;
         }
 
         public void AddChild(T child)
