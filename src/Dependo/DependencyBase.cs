@@ -5,24 +5,20 @@
 
     public abstract class DependencyBase<T, TKey> : IDependency<T, TKey>
         where T : DependencyBase<T, TKey>
+        where TKey : IComparable<TKey>, IEquatable<TKey>
     {
         private readonly HashSet<T> _children;
 
-        public T Parent { get; private set; }
+        public TKey Key { get; private set; }
 
-        public abstract TKey Key { get; }
+        public T Parent { get; private set; }
 
         public IEnumerable<T> Children => _children;
 
-        protected DependencyBase(Func<IEqualityComparer<T>> comparerSelector)
+        protected DependencyBase(TKey key)
         {
-            if (comparerSelector == null)
-            {
-                throw new ArgumentNullException(nameof(comparerSelector));
-            }
-
-
-            _children = new HashSet<T>(comparerSelector());
+            _children = new HashSet<T>(new Derp<T, TKey>());
+            Key = key;
             Parent = null;
         }
 
@@ -36,7 +32,20 @@
             child.Parent = null;
         }
 
-        public abstract int CompareTo(T other);
+        public int CompareTo(T other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return 0;
+            }
+
+            if (ReferenceEquals(null, other))
+            {
+                return 1;
+            }
+
+            return Key.CompareTo(other.Key);
+        }
 
         public bool Equals(T other)
         {
@@ -128,6 +137,21 @@
             }
 
             return sibling.Parent != null && sibling.Parent.Equals(Parent);
+        }
+    }
+
+    internal class Derp<T, TKey> : IEqualityComparer<DependencyBase<T, TKey>>
+        where T : DependencyBase<T, TKey>
+        where TKey : IComparable<TKey>, IEquatable<TKey>
+    {
+        public bool Equals(DependencyBase<T, TKey> x, DependencyBase<T, TKey> y)
+        {
+            return x.Key.Equals(y.Key);
+        }
+
+        public int GetHashCode(DependencyBase<T, TKey> obj)
+        {
+            return obj.Key.GetHashCode();
         }
     }
 }

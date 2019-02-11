@@ -1,9 +1,16 @@
 ﻿namespace Dependo
 {
     using System;
+    using System.Collections.Generic;
 
-    public interface IDependencyContainer<T, TKey> where T : class
+    public interface IDependencyContainer<T, TKey>
+        where T : class
+        where TKey : IComparable<TKey>, IEquatable<TKey>
     {
-        IDependencyContainer<T, TKey> RegisterDependency(T dependency, Action<IDependencyBuilder<T, TKey>> action = null);
+        IEnumerable<IDependency<T, TKey>> Dependencies { get; }
+
+        IEnumerable<IDependencyEdge<TKey>> Edges { get; }
+
+        IDependencyContainer<T, TKey> RegisterDependency(T dependency, params TKey[] keys);
     }
 }

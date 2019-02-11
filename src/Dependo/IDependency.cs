@@ -5,6 +5,7 @@
 
     public interface IDependency<T, out TKey> : IComparable<T>, IEquatable<T>
         where T : class
+        where TKey : IComparable<TKey>, IEquatable<TKey>
     {
         TKey Key { get; }
 
