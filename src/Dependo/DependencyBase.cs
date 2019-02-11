@@ -18,7 +18,7 @@
 
         protected DependencyBase(TKey key)
         {
-            _children = new HashSet<T>(new Derp<T, TKey>());
+            _children = new HashSet<T>(new DependencyBaseComparer<T, TKey>());
             Key = key;
             Parent = null;
         }
@@ -146,7 +146,7 @@
         }
     }
 
-    internal class Derp<T, TKey> : IEqualityComparer<DependencyBase<T, TKey>>
+    internal class DependencyBaseComparer<T, TKey> : IEqualityComparer<DependencyBase<T, TKey>>
         where T : DependencyBase<T, TKey>
         where TKey : IComparable<TKey>, IEquatable<TKey>
     {

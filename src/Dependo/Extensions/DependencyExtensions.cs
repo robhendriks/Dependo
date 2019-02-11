@@ -1,7 +1,6 @@
 ﻿namespace Dependo.Extensions
 {
     using System;
-    using System.Collections.Generic;
     using Walkers;
 
     public static class DependencyExtensions
