@@ -1,5 +1,6 @@
 ﻿namespace Dependo.Tests
 {
+    using System.Linq;
     using Extensions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Plugins;
@@ -11,13 +12,15 @@
         public void Test()
         {
             var container = new PluginContainer()
-                .RegisterDependency(new Plugin("A"), "C")
-                .RegisterDependency(new Plugin("B"))
-                .RegisterDependency(new Plugin("C"), "B", "D")
+                .RegisterDependency(new Plugin("A"), "B")
+                .RegisterDependency(new Plugin("B"), "D")
+                .RegisterDependency(new Plugin("C"), "B")
                 .RegisterDependency(new Plugin("D"))
-                .RegisterDependency(new Plugin("E"), "A");
+                .RegisterDependency(new Plugin("E"), "C", "A");
 
-            container.ResolveDependencies();
+            var sortedDependencies = container.ResolveDependencies();
+
+            // TODO: Verified functional testing, write unit tests!
         }
     }
 }
