@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Exceptions;
 
     public abstract class DependencyBase<T, TKey> : IDependency<T, TKey>
@@ -10,11 +11,15 @@
     {
         private readonly HashSet<T> _children;
 
-        public TKey Key { get; private set; }
+        public TKey Key { get; }
 
         public T Parent { get; private set; }
 
         public IEnumerable<T> Children => _children;
+
+        public IEnumerable<T> Ancestors => GetAncestors();
+
+        public IEnumerable<T> Descendants => GetDescendants();
 
         protected DependencyBase(TKey key)
         {
@@ -23,12 +28,38 @@
             Parent = null;
         }
 
-        protected virtual void ChildAdded(T child)
+        protected IEnumerable<T> GetAncestors()
+        {
+            if (Parent != null)
+            {
+                foreach (var ancestor in Parent.Ancestors)
+                {
+                    yield return ancestor;
+                }
+
+                yield return Parent;
+            }
+        }
+
+        protected IEnumerable<T> GetDescendants()
+        {
+            foreach (var child in Children)
+            {
+                yield return child;
+
+                foreach (var descendant in child.Descendants)
+                {
+                    yield return descendant;
+                }
+            }
+        }
+
+        protected void ChildAdded(T child)
         {
             child.Parent = (T) this;
         }
 
-        protected virtual void ChildRemoved(T child)
+        protected void ChildRemoved(T child)
         {
             child.Parent = null;
         }
@@ -143,6 +174,26 @@
             }
 
             return sibling.Parent != null && sibling.Parent.Equals(Parent);
+        }
+
+        public bool IsAncestorOf(T descendant)
+        {
+            if (descendant == null)
+            {
+                throw new ArgumentNullException(nameof(descendant));
+            }
+
+            return descendant.Ancestors.Contains(this);
+        }
+
+        public bool IsDescendantOf(T ancestor)
+        {
+            if (ancestor == null)
+            {
+                throw new ArgumentNullException(nameof(ancestor));
+            }
+
+            return ancestor.Descendants.Contains(this);
         }
     }
 

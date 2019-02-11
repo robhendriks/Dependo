@@ -1,9 +1,10 @@
 ﻿namespace Dependo.Tests
 {
     using System;
+    using System.Linq;
     using Extensions;
+    using Items;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Plugins;
 
     [TestClass]
     public class DependencyContainerBaseTests
@@ -11,16 +12,16 @@
         [TestMethod]
         public void Test()
         {
-            var container = new PluginContainer()
-                .RegisterDependency(new Plugin("A"), "B")
-                .RegisterDependency(new Plugin("B"), "D")
-                .RegisterDependency(new Plugin("C"), "B")
-                .RegisterDependency(new Plugin("D"))
-                .RegisterDependency(new Plugin("E"), "C", "A")
-                .RegisterDependency(new Plugin("F"))
-                .RegisterDependency(new Plugin("G"), "F");
+            var container = new ItemContainer()
+                .RegisterDependency(new Item("A"), "B")
+                .RegisterDependency(new Item("B"), "D")
+                .RegisterDependency(new Item("C"), "B")
+                .RegisterDependency(new Item("D"))
+                .RegisterDependency(new Item("E"), "C", "A")
+                .RegisterDependency(new Item("F"))
+                .RegisterDependency(new Item("G"), "F");
 
-            var roots = container.ResolveDependencies();
+            var roots = container.ResolveDependencies().ToList();
 
             foreach (var root in roots)
             {

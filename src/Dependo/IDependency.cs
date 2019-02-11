@@ -13,6 +13,10 @@
 
         IEnumerable<T> Children { get; }
 
+        IEnumerable<T> Ancestors { get; }
+
+        IEnumerable<T> Descendants { get; }
+
         bool HasChildren();
 
         void AddChild(T child);
@@ -30,5 +34,9 @@
         bool IsChildOf(T parent);
 
         bool IsSiblingOf(T sibling);
+
+        bool IsAncestorOf(T descendant);
+
+        bool IsDescendantOf(T ancestor);
     }
 }

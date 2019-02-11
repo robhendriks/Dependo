@@ -60,14 +60,11 @@
 
             if (edges.Count > 0)
             {
+                // TODO: Fetch the problematic node and add a detailed report
                 throw new DependencyException("Cyclic reference detected.");
             }
 
             return sortedNodes;
-        }
-
-        protected void Visit(IDependency<T, TKey> current)
-        {
         }
     }
 }
