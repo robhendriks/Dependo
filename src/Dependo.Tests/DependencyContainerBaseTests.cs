@@ -13,13 +13,19 @@
         public void Test()
         {
             var container = new ItemContainer()
-                .RegisterDependency(new Item("A"), "B")
-                .RegisterDependency(new Item("B"), "D")
-                .RegisterDependency(new Item("C"), "B")
+                .RegisterDependency(new Item("A")
+                    .DependsOn("B"))
+                .RegisterDependency(new Item("B")
+                    .DependsOn("D"))
+                .RegisterDependency(new Item("C")
+                    .DependsOn("B"))
                 .RegisterDependency(new Item("D"))
-                .RegisterDependency(new Item("E"), "C", "A")
+                .RegisterDependency(new Item("E")
+                    .DependsOn("C")
+                    .DependsOn("A"))
                 .RegisterDependency(new Item("F"))
-                .RegisterDependency(new Item("G"), "F");
+                .RegisterDependency(new Item("G")
+                    .DependsOn("F"));
 
             var roots = container.ResolveDependencies().ToList();
 

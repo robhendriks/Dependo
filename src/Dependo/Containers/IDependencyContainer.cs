@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Builders;
 
     public interface IDependencyContainer<T, TKey>
         where T : class
@@ -12,5 +13,7 @@
         IEnumerable<IDependencyEdge<TKey>> Edges { get; }
 
         IDependencyContainer<T, TKey> RegisterDependency(T dependency, params TKey[] keys);
+
+        IDependencyContainer<T, TKey> RegisterDependency(IDependencyBuilder<T, TKey> builder);
     }
 }

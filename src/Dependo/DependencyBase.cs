@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Builders;
     using Exceptions;
 
     public abstract class DependencyBase<T, TKey> : IDependency<T, TKey>
@@ -26,6 +27,11 @@
             _children = new HashSet<T>(new DependencyBaseComparer<T, TKey>());
             Key = key;
             Parent = null;
+        }
+
+        public IDependencyBuilder<T, TKey> DependsOn(TKey key)
+        {
+            return new DependencyBuilder<T, TKey>(this).DependsOn(key);
         }
 
         protected IEnumerable<T> GetAncestors()

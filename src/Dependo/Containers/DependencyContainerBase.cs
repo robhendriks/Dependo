@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Builders;
 
     public class DependencyContainerBase<T, TKey> : IDependencyContainer<T, TKey>
         where T : DependencyBase<T, TKey>
@@ -32,6 +33,15 @@
             keys?.Select(key => new DependencyEdge<TKey>(dependency.Key, key))
                 .ToList()
                 .ForEach(_edges.Add);
+
+            return this;
+        }
+
+        public IDependencyContainer<T, TKey> RegisterDependency(IDependencyBuilder<T, TKey> builder)
+        {
+            _roots.Add((DependencyBase<T, TKey>) builder.Node);
+            builder.Edges.ToList()
+                .ForEach(edge => _edges.Add((DependencyEdge<TKey>) edge));
 
             return this;
         }

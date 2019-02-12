@@ -2,8 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using Builders;
 
-    public interface IDependency<T, out TKey> : IComparable<T>, IEquatable<T>
+    public interface IDependency<T, TKey> : IComparable<T>, IEquatable<T>
         where T : class
         where TKey : IComparable<TKey>, IEquatable<TKey>
     {
@@ -16,6 +17,8 @@
         IEnumerable<T> Ancestors { get; }
 
         IEnumerable<T> Descendants { get; }
+
+        IDependencyBuilder<T, TKey> DependsOn(TKey key);
 
         bool HasChildren();
 
