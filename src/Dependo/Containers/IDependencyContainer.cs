@@ -4,6 +4,11 @@
     using System.Collections.Generic;
     using Builders;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     public interface IDependencyContainer<T, TKey>
         where T : class
         where TKey : IComparable<TKey>, IEquatable<TKey>

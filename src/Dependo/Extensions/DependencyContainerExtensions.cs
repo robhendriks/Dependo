@@ -6,6 +6,9 @@
     using Containers;
     using Resolvers;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static class DependencyContainerExtensions
     {
         public static IEnumerable<T> ResolveDependencies<T, TKey>(this IDependencyContainer<T, TKey> container, bool rootsOnly = true)

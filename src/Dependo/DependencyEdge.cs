@@ -1,5 +1,9 @@
 ﻿namespace Dependo
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
     public class DependencyEdge<TKey> : IDependencyEdge<TKey>
     {
         public TKey From { get; }

@@ -3,6 +3,11 @@
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     public class DependencyBuilder<T, TKey> : IDependencyBuilder<T, TKey>
         where T : class
         where TKey : IComparable<TKey>, IEquatable<TKey>

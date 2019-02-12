@@ -6,6 +6,11 @@
     using Containers;
     using Exceptions;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     public class DependencyResolver<T, TKey> : IDependencyResolver<T, TKey>
         where T : class
         where TKey : IComparable<TKey>, IEquatable<TKey>

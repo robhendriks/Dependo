@@ -6,6 +6,11 @@
     using Builders;
     using Exceptions;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     public abstract class DependencyBase<T, TKey> : IDependency<T, TKey>
         where T : DependencyBase<T, TKey>
         where TKey : IComparable<TKey>, IEquatable<TKey>

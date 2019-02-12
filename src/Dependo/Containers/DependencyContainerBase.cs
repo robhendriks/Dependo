@@ -5,6 +5,11 @@
     using System.Linq;
     using Builders;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     public abstract class DependencyContainerBase<T, TKey> : IDependencyContainer<T, TKey>
         where T : DependencyBase<T, TKey>
         where TKey : IComparable<TKey>, IEquatable<TKey>

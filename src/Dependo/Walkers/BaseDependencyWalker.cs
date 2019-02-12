@@ -3,6 +3,11 @@
     using System;
     using System.Linq;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     public abstract class BaseDependencyWalker<T, TKey> : IDependencyWalker<T, TKey>
         where T : class
         where TKey : IComparable<TKey>, IEquatable<TKey>

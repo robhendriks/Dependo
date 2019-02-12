@@ -3,6 +3,9 @@
     using System;
     using System.Runtime.Serialization;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public class DependencyException : Exception
     {
