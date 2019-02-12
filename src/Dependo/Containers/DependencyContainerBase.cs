@@ -5,7 +5,7 @@
     using System.Linq;
     using Builders;
 
-    public class DependencyContainerBase<T, TKey> : IDependencyContainer<T, TKey>
+    public abstract class DependencyContainerBase<T, TKey> : IDependencyContainer<T, TKey>
         where T : DependencyBase<T, TKey>
         where TKey : IComparable<TKey>, IEquatable<TKey>
     {
@@ -16,7 +16,7 @@
 
         public IEnumerable<IDependencyEdge<TKey>> Edges => _edges;
 
-        public DependencyContainerBase()
+        protected DependencyContainerBase()
         {
             _roots = new List<DependencyBase<T, TKey>>();
             _edges = new List<DependencyEdge<TKey>>();

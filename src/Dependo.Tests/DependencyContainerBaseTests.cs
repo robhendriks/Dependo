@@ -33,19 +33,10 @@
             {
                 root.Walk((info, plugin) =>
                 {
-                    if (info.Level == 0)
-                    {
-                        Console.WriteLine("{0}", plugin.Key);
-                    }
-                    else
-                    {
-                        var c = info.IsLast ? '└' : '├';
-                        Console.WriteLine("{0}{1} {2}", "".PadLeft((info.Level - 1) * 2, ' '), c, plugin.Key);
-                    }
+                    // Print
+                    Console.WriteLine("{0}{1}", "".PadLeft(info.Level > 0 ? info.Level * 2 : 0, '.'), plugin.Key);
                 });
             }
-
-            // TODO: Verified functional testing, write unit tests!
         }
     }
 }
