@@ -31,11 +31,7 @@
 
             foreach (var root in roots)
             {
-                root.Walk((info, plugin) =>
-                {
-                    // Print
-                    Console.WriteLine("{0}{1}", "".PadLeft(info.Level > 0 ? info.Level * 2 : 0, '.'), plugin.Key);
-                });
+                root.Walk((info, plugin) => Console.WriteLine("{0}{1}", "".PadLeft(info.Level > 0 ? info.Level * 2 : 0, '.'), plugin.Key));
             }
         }
     }
